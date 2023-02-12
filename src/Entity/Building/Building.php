@@ -3,6 +3,7 @@
 namespace App\Entity\Building;
 
 use App\Entity\Apartments\Apartments;
+use App\Model\Building\BuildingModel;
 use App\Repository\Building\BuildingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -36,6 +37,15 @@ class Building
 
     public function __construct()
     {
+        $this->units = new ArrayCollection();
+    }
+    public function modify(Building $building)
+    {
+        $this->title = $building->title;
+        $this->city = $building->city;
+        $this->address = $building->address;
+        $this->descriptionNumber = $building->descriptionNumber;
+        $this->postZip = $building->postZip;
         $this->units = new ArrayCollection();
     }
 

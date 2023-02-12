@@ -1,0 +1,61 @@
+
+{% extends 'admin/base.html.twig' %}
+
+{% block custom_page_title %}Seznam budov{% endblock %}
+{% block custom_page_subtitle %}{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary table-box">
+                <div class="box-body">
+                    <table class="table table-bordered table-hover" data-controller="data-table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Název budovy</th>
+                            <th>Město</th>
+                            <th>Adresa</th>
+                            <th>Číslo popisné</th>
+                            <th>PSČ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for building in buildings %}
+                            <tr>
+                                <td>
+                                    {{ building.id }}
+                                </td>
+                                <td>
+                                    {{ building.title }}
+                                </td>
+                                <td>
+                                    {{ building.city }}
+                                </td>
+                                <td>
+                                    {{ building.address }}
+                                </td>
+                                <td>
+                                    {{ building.descriptionNumber }}
+                                </td>
+                                <td>
+                                    {{ building.postZip }}
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_building_edit',{'id':building.id}) }}"
+                                       class="btn btn-primary btn-sm">Upravit</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_building_delete',{'id':building.id}) }}"
+                                       class="btn btn-danger btn-sm">Vymazat</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Repository\Persons;
+namespace App\Repository\Person;
 
-use App\Entity\Persons\Persons;
+use App\Entity\Person\Person;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Persons>
+ * @extends ServiceEntityRepository<Person>
  *
- * @method Persons|null find($id, $lockMode = null, $lockVersion = null)
- * @method Persons|null findOneBy(array $criteria, array $orderBy = null)
- * @method Persons[]    findAll()
- * @method Persons[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Person|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Person|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Person[]    findAll()
+ * @method Person[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PersonsRepository extends ServiceEntityRepository
+class PersonRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Persons::class);
+        parent::__construct($registry, Person::class);
     }
 
-    public function save(Persons $entity, bool $flush = false): void
+    public function save(Person $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class PersonsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Persons $entity, bool $flush = false): void
+    public function remove(Person $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class PersonsRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Persons[] Returns an array of Persons objects
+//     * @return Person[] Returns an array of Person objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class PersonsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Persons
+//    public function findOneBySomeField($value): ?Person
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

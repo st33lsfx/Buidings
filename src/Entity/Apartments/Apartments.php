@@ -3,7 +3,7 @@
 namespace App\Entity\Apartments;
 
 use App\Entity\Building\Building;
-use App\Entity\Persons\Persons;
+use App\Entity\Person\Person;
 use App\Repository\Apartments\ApartmentsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,16 +15,16 @@ class Apartments
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $size = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $coldWaterStatus = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $hotWaterStatus = null;
 
     #[ORM\Column(nullable: true)]
@@ -37,7 +37,7 @@ class Apartments
     private ?Building $building = null;
 
     #[ORM\OneToOne(inversedBy: 'apartments', cascade: ['persist', 'remove'])]
-    private ?Persons $person = null;
+    private ?Person $person = null;
 
     public function getId(): ?int
     {
@@ -49,7 +49,7 @@ class Apartments
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -61,7 +61,7 @@ class Apartments
         return $this->size;
     }
 
-    public function setSize(int $size): self
+    public function setSize(?int $size): self
     {
         $this->size = $size;
 
@@ -73,7 +73,7 @@ class Apartments
         return $this->coldWaterStatus;
     }
 
-    public function setColdWaterStatus(float $coldWaterStatus): self
+    public function setColdWaterStatus(?float $coldWaterStatus): self
     {
         $this->coldWaterStatus = $coldWaterStatus;
 
@@ -85,7 +85,7 @@ class Apartments
         return $this->hotWaterStatus;
     }
 
-    public function setHotWaterStatus(float $hotWaterStatus): self
+    public function setHotWaterStatus(?float $hotWaterStatus): self
     {
         $this->hotWaterStatus = $hotWaterStatus;
 
@@ -128,12 +128,12 @@ class Apartments
         return $this;
     }
 
-    public function getPerson(): ?Persons
+    public function getPerson(): ?Person
     {
         return $this->person;
     }
 
-    public function setPerson(?Persons $person): self
+    public function setPerson(?Person $person): self
     {
         $this->person = $person;
 

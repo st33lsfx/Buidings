@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Entity\Persons;
+namespace App\Entity\Person;
 
 use App\Entity\Apartments\Apartments;
-use App\Repository\Persons\PersonsRepository;
+use App\Repository\Person\PersonRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PersonsRepository::class)]
-class Persons
+#[ORM\Entity(repositoryClass: PersonRepository::class)]
+class Person
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,14 +18,14 @@ class Persons
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $lastName = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $phone = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $lastName = null;
 
     #[ORM\OneToOne(mappedBy: 'person', cascade: ['persist', 'remove'])]
     private ?Apartments $apartments = null;
@@ -46,18 +47,6 @@ class Persons
         return $this;
     }
 
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -75,9 +64,21 @@ class Persons
         return $this->phone;
     }
 
-    public function setPhone(int $phone): self
+    public function setPhone(?int $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
 
         return $this;
     }
