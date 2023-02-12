@@ -3,7 +3,7 @@
 namespace App\Entity\Apartments;
 
 use App\Entity\Building\Building;
-use App\Entity\Person\Person;
+use App\Entity\Persons\Persons;
 use App\Repository\Apartments\ApartmentsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,6 +15,9 @@ class Apartments
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
+
     #[ORM\Column]
     private ?int $size = null;
 
@@ -24,21 +27,33 @@ class Apartments
     #[ORM\Column]
     private ?float $hotWaterStatus = null;
 
-    #[ORM\Column]
-    private ?int $gasMeterStatus� = null;
+    #[ORM\Column(nullable: true)]
+    private ?float $gasMeterStatus = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $meterStatus = null;
 
     #[ORM\ManyToOne(inversedBy: 'units')]
     private ?Building $building = null;
 
     #[ORM\OneToOne(inversedBy: 'apartments', cascade: ['persist', 'remove'])]
-    private ?Person $person = null;
+    private ?Persons $person = null;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     public function getSize(): ?int
@@ -77,14 +92,14 @@ class Apartments
         return $this;
     }
 
-    public function getGasMeterStatus�(): ?int
+    public function getGasMeterStatus(): ?float
     {
-        return $this->gasMeterStatus�;
+        return $this->gasMeterStatus;
     }
 
-    public function setGasMeterStatus�(int $gasMeterStatus�): self
+    public function setGasMeterStatus(?float $gasMeterStatus): self
     {
-        $this->gasMeterStatus� = $gasMeterStatus�;
+        $this->gasMeterStatus = $gasMeterStatus;
 
         return $this;
     }
@@ -94,7 +109,7 @@ class Apartments
         return $this->meterStatus;
     }
 
-    public function setMeterStatus(float $meterStatus): self
+    public function setMeterStatus(?float $meterStatus): self
     {
         $this->meterStatus = $meterStatus;
 
@@ -113,12 +128,12 @@ class Apartments
         return $this;
     }
 
-    public function getPerson(): ?Person
+    public function getPerson(): ?Persons
     {
         return $this->person;
     }
 
-    public function setPerson(?Person $person): self
+    public function setPerson(?Persons $person): self
     {
         $this->person = $person;
 

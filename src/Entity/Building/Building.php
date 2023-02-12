@@ -17,6 +17,9 @@ class Building
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $title = null;
+
+    #[ORM\Column(length: 255)]
     private ?string $city = null;
 
     #[ORM\Column(length: 255)]
@@ -24,6 +27,9 @@ class Building
 
     #[ORM\Column]
     private ?int $descriptionNumber = null;
+
+    #[ORM\Column]
+    private ?int $postZip = null;
 
     #[ORM\OneToMany(mappedBy: 'building', targetEntity: Apartments::class)]
     private Collection $units;
@@ -36,6 +42,18 @@ class Building
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     public function getCity(): ?string
@@ -70,6 +88,18 @@ class Building
     public function setDescriptionNumber(int $descriptionNumber): self
     {
         $this->descriptionNumber = $descriptionNumber;
+
+        return $this;
+    }
+
+    public function getPostZip(): ?int
+    {
+        return $this->postZip;
+    }
+
+    public function setPostZip(int $postZip): self
+    {
+        $this->postZip = $postZip;
 
         return $this;
     }
