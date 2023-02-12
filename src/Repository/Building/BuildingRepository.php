@@ -4,6 +4,7 @@ namespace App\Repository\Building;
 
 use App\Entity\Building\Building;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,9 +17,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BuildingRepository extends ServiceEntityRepository
 {
+    private $entityManager;
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Building::class);
+        $this->entityManager = $entityManager;
     }
 
     public function save(Building $entity, bool $flush = false): void
