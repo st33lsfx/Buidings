@@ -33,11 +33,11 @@ class Building
     private ?int $postZip = null;
 
     #[ORM\OneToMany(mappedBy: 'building', targetEntity: Apartment::class)]
-    private Collection $units;
+    private Collection $apartments;
 
     public function __construct()
     {
-        $this->units = new ArrayCollection();
+        $this->apartments = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -113,31 +113,19 @@ class Building
     /**
      * @return Collection<int, Apartment>
      */
-    public function getUnits(): Collection
+    public function getApartments(): Collection
     {
-        return $this->units;
+        return $this->apartments;
     }
 
-    public function addUnit(Apartment $unit): self
+    public function addApartment(Apartment $apartment): self
     {
-        if (!$this->units->contains($unit)) {
-            $this->units->add($unit);
-            $unit->setBuilding($this);
-        }
-
-        return $this;
+        $this->getApartments()->add($apartment);
     }
 
-    public function removeUnit(Apartment $unit): self
+    public function removeApartment(Apartment $apartment): self
     {
-        if ($this->units->removeElement($unit)) {
-            // set the owning side to null (unless already changed)
-            if ($unit->getBuilding() === $this) {
-                $unit->setBuilding(null);
-            }
-        }
-
-        return $this;
+        $this->getApartments()->remove($apartment);
     }
 
     public function mapFromModel(BuildingModel $buildingModel): void
