@@ -4,11 +4,10 @@ namespace App\Controller\admin\Building;
 
 use App\Controller\BaseController;
 use App\Entity\Building\Building;
+use App\Factory\Building\BuildingFactory;
 use App\Form\BuildingType;
 use App\Model\Building\BuildingModel;
 use App\Repository\Building\BuildingRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,12 +15,12 @@ class BuildingController extends BaseController
 {
 
     private BuildingRepository $buildingRepository;
-    private EntityManagerInterface $em;
+    private BuildingFactory $buildingFactory;
 
-    public function __construct(EntityManagerInterface $em, BuildingRepository $buildingRepository)
+    public function __construct(BuildingRepository $buildingRepository, BuildingFactory $buildingFactory)
     {
         $this->buildingRepository = $buildingRepository;
-        $this->em = $em;
+        $this->buildingFactory = $buildingFactory;
     }
 
     #[Route('/building/', name: 'app_building_homepage')]
@@ -37,18 +36,16 @@ class BuildingController extends BaseController
     #[Route('/building/create/', name: 'app_building_create')]
     public function create( Request $request ): Response
     {
-        $newBuilding = new Building();
-        $form = $this->createForm(BuildingType::class, $newBuilding);
+        $newBuildingModel = new BuildingModel();
+        $form = $this->createForm(BuildingType::class, $newBuildingModel);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $newBuilding = $form->getData();
+            $building = $this->buildingFactory->createBuilding($newBuildingModel);
+            $this->buildingRepository->save($building);
 
-            $this->em->persist($newBuilding);
-            $this->em->flush();
-
-            $this->addFlash(BaseController::FL_SUCCESS, 'Budova byla úspěšně přidána');
+            $this->addFlash('success', 'Budova byla úspěšně přidána');
             return $this->redirectToRoute('app_building_homepage', []);
         }
 
@@ -59,20 +56,19 @@ class BuildingController extends BaseController
     }
 
     #[Route('/building/edit/{id}', name: 'app_building_edit')]
-    public function update(Building $building, BuildingModel $buildingModel, EntityManagerInterface $em, Request $request): Response
+    public function update(Building $building, Request $request): Response
     {
-        $editBuilding = $buildingModel->createFromEntity($building);
+        $editBuilding = BuildingModel::createFromEntity($building);
 
-        $form = $this->createForm(BuildingType::class, $building);
+        $form = $this->createForm(BuildingType::class, $editBuilding);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $editBuilding = $form->getData();
+            $building->mapFromModel($editBuilding);
+            $this->buildingRepository->save($building);
 
-            $building->modify($editBuilding);
-            $em->flush();
-            $this->addFlash(BaseController::FL_SUCCESS, 'uspěšně upraveno');
+            $this->addFlash('success', 'uspěšně upraveno');
             return $this->redirectToRoute('app_building_homepage', []);
 
         }
@@ -83,15 +79,11 @@ class BuildingController extends BaseController
     }
 
     #[Route('/building/{id}/delete', name: 'app_building_delete')]
-    public function delete(ManagerRegistry $doctrine, int $id): Response
+    public function delete( Building $building ): Response
     {
-        $entityManager = $doctrine->getManager();
-        $building = $entityManager->getRepository(Building::class)->find($id);
+        $this->buildingRepository->remove($building);
 
-        $this->addFlash(BaseController::FL_SUCCESS, 'Budova byla úspěšně smazána.');
-
-        $entityManager->remove($building);
-        $entityManager->flush();
+        $this->addFlash('success', 'Budova byla úspěšně smazána.');
 
         return $this->redirectToRoute('app_building_homepage');
     }

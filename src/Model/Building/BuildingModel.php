@@ -3,12 +3,11 @@
 namespace App\Model\Building;
 
 use App\Entity\Building\Building;
-use App\Services\Building\BuildingCreate;
 
 class BuildingModel
 {
 
-    public ?int $id = null;
+    public int $id;
 
     public ?string $title = null;
 
@@ -20,7 +19,7 @@ class BuildingModel
 
     public ?int $postZip = null;
 
-    public function createFromEntity(Building $building): BuildingModel
+    public static function createFromEntity(Building $building): BuildingModel
     {
         $build = new self();
 
@@ -37,11 +36,6 @@ class BuildingModel
         $build->postZip = $building->getPostZip();
 
         return $build;
-    }
-
-    public function createFromEmpty(): BuildingModel
-    {
-        return new self();
     }
 
 

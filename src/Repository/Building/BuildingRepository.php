@@ -26,20 +26,14 @@ class BuildingRepository extends ServiceEntityRepository
 
     public function save(Building $entity, bool $flush = false): void
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
     }
 
     public function remove(Building $entity, bool $flush = false): void
     {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        $this->entityManager->remove($entity);
+        $this->entityManager->flush();
     }
 
 //    /**

@@ -2,7 +2,7 @@
 
 namespace App\Entity\Building;
 
-use App\Entity\Apartments\Apartments;
+use App\Entity\Apartments\Apartment;
 use App\Model\Building\BuildingModel;
 use App\Repository\Building\BuildingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,41 +15,37 @@ class Building
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $address = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $descriptionNumber = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $postZip = null;
 
-    #[ORM\OneToMany(mappedBy: 'building', targetEntity: Apartments::class)]
+    #[ORM\OneToMany(mappedBy: 'building', targetEntity: Apartment::class)]
     private Collection $units;
 
     public function __construct()
     {
         $this->units = new ArrayCollection();
     }
-    public function modify(Building $building)
+
+    public function __toString(): string
     {
-        $this->title = $building->title;
-        $this->city = $building->city;
-        $this->address = $building->address;
-        $this->descriptionNumber = $building->descriptionNumber;
-        $this->postZip = $building->postZip;
-        $this->units = new ArrayCollection();
+        return $this->getTitle();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -115,14 +111,14 @@ class Building
     }
 
     /**
-     * @return Collection<int, Apartments>
+     * @return Collection<int, Apartment>
      */
     public function getUnits(): Collection
     {
         return $this->units;
     }
 
-    public function addUnit(Apartments $unit): self
+    public function addUnit(Apartment $unit): self
     {
         if (!$this->units->contains($unit)) {
             $this->units->add($unit);
@@ -132,7 +128,7 @@ class Building
         return $this;
     }
 
-    public function removeUnit(Apartments $unit): self
+    public function removeUnit(Apartment $unit): self
     {
         if ($this->units->removeElement($unit)) {
             // set the owning side to null (unless already changed)
@@ -142,5 +138,14 @@ class Building
         }
 
         return $this;
+    }
+
+    public function mapFromModel(BuildingModel $buildingModel): void
+    {
+        $this->setTitle($buildingModel->title);
+        $this->setCity($buildingModel->city);
+        $this->setAddress($buildingModel->address);
+        $this->setDescriptionNumber($buildingModel->descriptionNumber);
+        $this->setPostZip($buildingModel->postZip);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Building\Building;
+use App\Model\Building\BuildingModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -54,7 +55,7 @@ class BuildingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Building::class,
+            'data_class' => BuildingModel::class,
         ]);
     }
 }
