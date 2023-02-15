@@ -2,10 +2,11 @@
 
 namespace App\Entity\Person;
 
-use App\Entity\Apartments\Apartments;
+use App\Entity\Apartments\Apartment;
 use App\Repository\Person\PersonRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use function Symfony\Component\Translation\t;
 
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
 class Person
@@ -13,7 +14,7 @@ class Person
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
@@ -28,9 +29,14 @@ class Person
     private ?string $lastName = null;
 
     #[ORM\OneToOne(mappedBy: 'person', cascade: ['persist', 'remove'])]
-    private ?Apartments $apartments = null;
+    private ?Apartment $apartments = null;
 
-    public function getId(): ?int
+    public function __toString(): string
+    {
+        return $this->getFirstName() . ' ' .  $this->getLastName();
+    }
+
+    public function getId(): int
     {
         return $this->id;
     }
@@ -83,12 +89,12 @@ class Person
         return $this;
     }
 
-    public function getApartments(): ?Apartments
+    public function getApartments(): ?Apartment
     {
         return $this->apartments;
     }
 
-    public function setApartments(?Apartments $apartments): self
+    public function setApartments(?Apartment $apartments): self
     {
         // unset the owning side of the relation if necessary
         if ($apartments === null && $this->apartments !== null) {

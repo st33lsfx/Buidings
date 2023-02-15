@@ -4,6 +4,7 @@ namespace App\Repository\Person;
 
 use App\Entity\Person\Person;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,51 +17,22 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PersonRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $entityManager;
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Person::class);
+        $this->entityManager = $entityManager;
     }
-
     public function save(Person $entity, bool $flush = false): void
     {
-        $this->getEntityManager()->persist($entity);
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
     }
 
     public function remove(Person $entity, bool $flush = false): void
     {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        $this->entityManager->remove($entity);
+        $this->entityManager->flush();
     }
-
-//    /**
-//     * @return Person[] Returns an array of Person objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Person
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
