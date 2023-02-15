@@ -4,16 +4,16 @@ namespace App\Entity\Apartments;
 
 use App\Entity\Building\Building;
 use App\Entity\Person\Person;
-use App\Repository\Apartments\ApartmentsRepository;
+use App\Repository\Apartment\ApartmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ApartmentsRepository::class)]
-class Apartments
+#[ORM\Entity(repositoryClass: ApartmentRepository::class)]
+class Apartment
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
@@ -31,15 +31,17 @@ class Apartments
     private ?float $gasMeterStatus = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $meterStatus = null;
+    private ?float $squareStatus = null;
 
     #[ORM\ManyToOne(inversedBy: 'units')]
+    #[ORM\JoinColumn(name: 'building_id', referencedColumnName: 'id')]
     private ?Building $building = null;
 
-    #[ORM\OneToOne(inversedBy: 'apartments', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'apartment', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')]
     private ?Person $person = null;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -104,14 +106,14 @@ class Apartments
         return $this;
     }
 
-    public function getMeterStatus(): ?float
+    public function getSquareStatus(): ?float
     {
-        return $this->meterStatus;
+        return $this->squareStatus;
     }
 
-    public function setMeterStatus(?float $meterStatus): self
+    public function setSquareStatus(?float $squareStatus): self
     {
-        $this->meterStatus = $meterStatus;
+        $this->squareStatus = $squareStatus;
 
         return $this;
     }
