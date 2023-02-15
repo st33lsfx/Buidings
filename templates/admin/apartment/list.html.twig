@@ -1,0 +1,61 @@
+
+{% extends 'admin/base.html.twig' %}
+
+{% block custom_page_title %}Seznam apartmanů{% endblock %}
+{% block custom_page_subtitle %}{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary table-box">
+                <div class="box-body">
+                    <table class="table table-bordered table-hover" data-controller="data-table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Budova</th>
+                            <th>Osoba</th>
+                            <th>Název</th>
+                            <th>Velikost</th>
+                            <th>Stav studené vody</th>
+                            <th>Stav teplé vody</th>
+                            <th>Stav plynoměru</th>
+                            <th>Stav elektroměru</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for apartments in apartment %}
+                            <tr>
+                                <td>
+                                    {{ apartments.id }}
+                                </td>
+                                <td>
+                                    {{ apartments.building }}
+                                </td>
+                                <td>
+                                    {{ apartments.person }}
+                                </td>
+                                <td>
+                                    {{ apartments.title }}
+                                </td>
+                                <td>
+                                    {{ apartments.coldWaterStatus }}
+                                </td>
+                                <td>
+                                    {{ apartments.hotWaterStatus }}
+                                </td>
+                                <td>
+                                    {{ apartments.gasMeterStatus }}
+                                </td>
+                                <td>
+                                    {{ apartments.squareStatus }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
