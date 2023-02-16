@@ -3,28 +3,30 @@
 namespace App\Model\Apartment;
 
 use App\Entity\Apartments\Apartment;
+use App\Entity\Building\Building;
+use App\Entity\Person\Person;
 
 class ApartmentModel
 {
 
     public int $id;
 
-    public ?string $title;
+    public ?string $title = null;
 
-    public ?int $size;
+    public ?int $size = null;
 
-    public ?float $coldWaterStatus;
+    public ?float $coldWaterStatus = null;
 
-    public ?float $hotWaterStatus;
-    public ?float $gasMeterStatus;
+    public ?float $hotWaterStatus = null;
+    public ?float $gasMeterStatus = null;
 
-    public ?float $squareStatus;
+    public ?float $squareStatus = null;
 
-    public ?string $building;
+    public building $building;
 
-    public ?string $person;
+    public ?person $person = null;
 
-    public function createFromEntity(Apartment $apartments): ApartmentModel
+    public static function createFromEntity(Apartment $apartments): ApartmentModel
     {
         $newApartments = new self();
 
@@ -39,11 +41,6 @@ class ApartmentModel
         $newApartments->person = $apartments->getPerson();
 
         return $newApartments;
-    }
-
-    public function createFromEmpty(): ApartmentModel
-    {
-        return new self();
     }
 
 
