@@ -4,7 +4,7 @@ namespace App\Controller\Admin\Person;
 
 use App\Entity\Person\Person;
 use App\Factory\Person\PersonFactory;
-use App\Form\PersonType;
+use App\Form\Person\PersonType;
 use App\Model\Person\PersonModel;
 use App\Repository\Person\PersonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

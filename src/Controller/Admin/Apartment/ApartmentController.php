@@ -4,7 +4,7 @@ namespace App\Controller\Admin\Apartment;
 
 use App\Entity\Apartments\Apartment;
 use App\Factory\Apartment\ApartmentFactory;
-use App\Form\ApartmentType;
+use App\Form\Apartment\ApartmentType;
 use App\Model\Apartment\ApartmentModel;
 use App\Repository\Apartment\ApartmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

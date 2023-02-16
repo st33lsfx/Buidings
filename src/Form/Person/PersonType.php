@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Person;
 
 use App\Entity\Apartments\Apartment;
-use App\Entity\Person\Person;
 use App\Model\Person\PersonModel;
 use App\Repository\Apartment\ApartmentRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

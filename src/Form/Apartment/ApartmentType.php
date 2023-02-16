@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Apartment;
 
-use App\Entity\Apartments\Apartment;
 use App\Entity\Building\Building;
 use App\Entity\Person\Person;
 use App\Model\Apartment\ApartmentModel;

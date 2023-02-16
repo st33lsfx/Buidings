@@ -5,12 +5,13 @@ namespace App\Controller\Admin\Building;
 use App\Controller\BaseController;
 use App\Entity\Building\Building;
 use App\Factory\Building\BuildingFactory;
-use App\Form\BuildingType;
+use App\Form\Building\BuildingType;
 use App\Model\Building\BuildingModel;
 use App\Repository\Building\BuildingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 class BuildingController extends BaseController
 {
 
