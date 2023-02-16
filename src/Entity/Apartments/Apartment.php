@@ -4,6 +4,7 @@ namespace App\Entity\Apartments;
 
 use App\Entity\Building\Building;
 use App\Entity\Person\Person;
+use App\Model\Apartment\ApartmentModel;
 use App\Repository\Apartment\ApartmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -33,13 +34,18 @@ class Apartment
     #[ORM\Column(nullable: true)]
     private ?float $squareStatus = null;
 
-    #[ORM\ManyToOne(inversedBy: 'units')]
-    #[ORM\JoinColumn(name: 'building_id', referencedColumnName: 'id')]
-    private ?Building $building = null;
+    #[ORM\ManyToOne(inversedBy: 'apartment')]
+    #[ORM\JoinColumn(name: 'building_id', referencedColumnName: 'id', nullable: false)]
+    private Building $building;
 
     #[ORM\OneToOne(inversedBy: 'apartment', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id', nullable: true)]
     private ?Person $person = null;
+
+    public function __toString(): string
+    {
+        return $this->getBuilding();
+    }
 
     public function getId(): int
     {
@@ -51,7 +57,7 @@ class Apartment
         return $this->title;
     }
 
-    public function setTitle(?string $title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
@@ -118,16 +124,14 @@ class Apartment
         return $this;
     }
 
-    public function getBuilding(): ?Building
+    public function getBuilding(): Building
     {
         return $this->building;
     }
 
-    public function setBuilding(?Building $building): self
+    public function setBuilding(Building $building): void
     {
         $this->building = $building;
-
-        return $this;
     }
 
     public function getPerson(): ?Person
@@ -135,10 +139,23 @@ class Apartment
         return $this->person;
     }
 
-    public function setPerson(?Person $person): self
+    public function setPerson(?Person $person): void
     {
+        if ($person) {
+            $person->setApartment($this);
+        }
         $this->person = $person;
+    }
 
-        return $this;
+    public function mapForModel(ApartmentModel $apartmentModel): void
+    {
+        $this->setTitle($apartmentModel->title);
+        $this->setBuilding($apartmentModel->building);
+        $this->setPerson($apartmentModel->person);
+        $this->setSize($apartmentModel->size);
+        $this->setColdWaterStatus($apartmentModel->coldWaterStatus);
+        $this->setHotWaterStatus($apartmentModel->hotWaterStatus);
+        $this->setGasMeterStatus($apartmentModel->gasMeterStatus);
+        $this->setSquareStatus($apartmentModel->squareStatus);
     }
 }
