@@ -14,8 +14,8 @@
                         <tr>
                             <th>Id</th>
                             <th>Budova</th>
-                            <th>Osoba</th>
                             <th>Název</th>
+                            <th>Osoba</th>
                             <th>Velikost</th>
                             <th>Stav studené vody</th>
                             <th>Stav teplé vody</th>
@@ -24,31 +24,43 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for apartments in apartment %}
+                        {% for apartment in apartments %}
+                            {{ dump(apartment) }}
                             <tr>
                                 <td>
-                                    {{ apartments.id }}
+                                    {{ apartment.id }}
                                 </td>
                                 <td>
-                                    {{ apartments.building }}
+                                    {{ apartment.building }}
                                 </td>
                                 <td>
-                                    {{ apartments.person }}
+                                    {{ apartment.title }}
                                 </td>
                                 <td>
-                                    {{ apartments.title }}
+                                    {{ apartment.person }}
                                 </td>
                                 <td>
-                                    {{ apartments.coldWaterStatus }}
+                                    {{ apartment.size }} m2
                                 </td>
                                 <td>
-                                    {{ apartments.hotWaterStatus }}
+                                    {{ apartment.coldWaterStatus }} m3
                                 </td>
                                 <td>
-                                    {{ apartments.gasMeterStatus }}
+                                    {{ apartment.hotWaterStatus }} m3
                                 </td>
                                 <td>
-                                    {{ apartments.squareStatus }}
+                                    {{ apartment.gasMeterStatus }} m3
+                                </td>
+                                <td>
+                                    {{ apartment.squareStatus }} m3
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_apartment_edit',{'id':apartment.id}) }}"
+                                       class="btn btn-primary btn-sm">Upravit</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_apartment_delete',{'id':apartment.id}) }}"
+                                       class="btn btn-danger btn-sm">Vymazat</a>
                                 </td>
                             </tr>
                         {% endfor %}
