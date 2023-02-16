@@ -33,11 +33,11 @@ class Building
     private ?int $postZip = null;
 
     #[ORM\OneToMany(mappedBy: 'building', targetEntity: Apartment::class)]
-    private Collection $apartments;
+    private Collection $apartment;
 
     public function __construct()
     {
-        $this->apartments = new ArrayCollection();
+        $this->apartment = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -115,7 +115,7 @@ class Building
      */
     public function getApartments(): Collection
     {
-        return $this->apartments;
+        return $this->apartment;
     }
 
     public function addApartment(Apartment $apartment): self
