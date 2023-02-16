@@ -1,0 +1,61 @@
+
+{% extends 'Admin/base.html.twig' %}
+
+{% block custom_page_title %}Seznam osob{% endblock %}
+{% block custom_page_subtitle %}{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary table-box">
+                <div class="box-body">
+                    <table class="table table-bordered table-hover" data-controller="data-table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Jméno</th>
+                            <th>Příjmení</th>
+                            <th>Telefon</th>
+                            <th>Email</th>
+                            <th>Apartmán</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for person in persons %}
+                            <tr>
+                                <td>
+                                    {{ person.id }}
+                                </td>
+                                <td>
+                                    {{ person.firstName }}
+                                </td>
+                                <td>
+                                    {{ person.lastName }}
+                                </td>
+                                <td>
+                                    {{ person.phone }}
+                                </td>
+                                <td>
+                                    {{ person.email }}
+                                </td>
+                                <td>
+                                    {{ person.apartment  }}
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_person_edit',{'id':person.id}) }}"
+                                       class="btn btn-primary btn-sm">Upravit</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_person_delete',{'id':person.id}) }}"
+                                       class="btn btn-danger btn-sm">Vymazat</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
