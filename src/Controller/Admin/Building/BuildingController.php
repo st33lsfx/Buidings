@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\admin\Building;
+namespace App\Controller\Admin\Building;
 
 use App\Controller\BaseController;
 use App\Entity\Building\Building;
