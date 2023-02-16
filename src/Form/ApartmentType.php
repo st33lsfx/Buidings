@@ -5,17 +5,15 @@ namespace App\Form;
 use App\Entity\Apartments\Apartment;
 use App\Entity\Building\Building;
 use App\Entity\Person\Person;
-use App\Repository\Apartment\ApartmentRepository;
+use App\Model\Apartment\ApartmentModel;
 use App\Repository\Building\BuildingRepository;
 use App\Repository\Person\PersonRepository;
-use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use function Symfony\Component\Translation\t;
 
 class ApartmentType extends AbstractType
 {
@@ -41,28 +39,32 @@ class ApartmentType extends AbstractType
                 'size',
                 NumberType::class,
                 [
-                    'label' => 'velikost'
+                    'label' => 'velikost',
+                    'required' => false
                 ]
             )
             ->add(
                 'coldWaterStatus',
                 NumberType::class,
                 [
-                    'label' => 'Stav studené vody'
+                    'label' => 'Stav studené vody',
+                    'required' => false
                 ]
             )
             ->add(
                 'hotWaterStatus',
                 NumberType::class,
                 [
-                    'label' => 'Stav teplé vody'
+                    'label' => 'Stav teplé vody',
+                    'required' => false
                 ]
             )
             ->add(
                 'gasMeterStatus',
                 NumberType::class,
                 [
-                    'label' => 'Stav plynoměru'
+                    'label' => 'Stav plynoměru',
+                    'required' => false
                 ]
             )
             ->add(
@@ -70,6 +72,7 @@ class ApartmentType extends AbstractType
                 NumberType::class,
                 [
                     'label' => 'Stav elektroměru',
+                    'required' => false
                 ]
             )
             ->add(
@@ -105,7 +108,7 @@ class ApartmentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Apartment::class,
+            'data_class' => ApartmentModel::class,
         ]);
     }
 }
