@@ -25,7 +25,7 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
         ])->setAttribute('class', 'header');
 
         $menu->addChild('Building', [
-            'label' => 'Building',
+            'label' => 'Buildings',
             'childOptions' => $event->getChildOptions(),
             'extras' => [
                 'badge' => [
@@ -83,6 +83,39 @@ class KnpMenuBuilderSubscriber implements EventSubscriberInterface
         $menu->getChild('Apartment')->addChild('ChildTwoItemId', [
             'route' => 'app_apartment_create' ,
             'label' => 'New apartment',
+            'extras' => [
+                'badges' => [
+                    [ 'value' => 2, 'color' => 'blue' ],
+                ],
+            ],
+            'childOptions' => $event->getChildOptions()
+        ])->setLabelAttribute('icon', 'fas fa-building');
+
+        $menu->addChild('Person', [
+            'label' => 'Person',
+            'childOptions' => $event->getChildOptions(),
+            'extras' => [
+                'badge' => [
+                    'color' => 'blue',
+                    'value' => 1,
+                ],
+            ],
+        ])->setLabelAttribute('icon', 'fas fa-tachometer-alt');
+
+        $menu->getChild('Person')->addChild('ChildOneItemId', [
+            'route' => 'app_person_list',
+            'label' => 'All persons',
+            'extras' => [
+                'badges' => [
+                    [ 'value' => 2, 'color' => 'blue' ],
+                ],
+            ],
+            'childOptions' => $event->getChildOptions()
+        ])->setLabelAttribute('icon', 'fas fa-home');
+
+        $menu->getChild('Person')->addChild('ChildTwoItemId', [
+            'route' => 'app_person_create' ,
+            'label' => 'New person',
             'extras' => [
                 'badges' => [
                     [ 'value' => 2, 'color' => 'blue' ],
