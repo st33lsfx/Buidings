@@ -3,6 +3,7 @@
 namespace App\Entity\Person;
 
 use App\Entity\Apartments\Apartment;
+use App\Model\Person\PersonModel;
 use App\Repository\Person\PersonRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,24 +17,24 @@ class Person
     #[ORM\Column]
     private int $id;
 
+    #[ORM\Column(length: 255,)]
+    private string $firstName;
+
     #[ORM\Column(length: 255)]
-    private ?string $firstName = null;
+    private string $lastName;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $phone = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $lastName = null;
+    #[ORM\Column]
+    private int $phone;
 
     #[ORM\OneToOne(mappedBy: 'person', cascade: ['persist', 'remove'])]
-    private ?Apartment $apartments = null;
+    private ?Apartment $apartment = null;
 
     public function __toString(): string
     {
-        return $this->getFirstName() . ' ' .  $this->getLastName();
+        return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
     public function getId(): int
@@ -46,11 +47,9 @@ class Person
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -58,11 +57,9 @@ class Person
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
-
-        return $this;
     }
 
     public function getPhone(): ?int
@@ -70,11 +67,9 @@ class Person
         return $this->phone;
     }
 
-    public function setPhone(?int $phone): self
+    public function setPhone(int $phone): void
     {
         $this->phone = $phone;
-
-        return $this;
     }
 
     public function getLastName(): ?string
@@ -82,32 +77,39 @@ class Person
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
-
-        return $this;
     }
-
-    public function getApartments(): ?Apartment
+    public function getApartment(): ?Apartment
     {
-        return $this->apartments;
+        return $this->apartment;
     }
 
-    public function setApartments(?Apartment $apartments): self
+    public function setApartment(?Apartment $apartment): self
     {
         // unset the owning side of the relation if necessary
-        if ($apartments === null && $this->apartments !== null) {
-            $this->apartments->setPerson(null);
+        if ($apartment === null && $this->apartment !== null) {
+            $this->apartment->setPerson(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($apartments !== null && $apartments->getPerson() !== $this) {
-            $apartments->setPerson($this);
+        if ($apartment !== null && $apartment->getPerson() !== $this) {
+            $apartment->setPerson($this);
         }
 
-        $this->apartments = $apartments;
+        $this->apartment = $apartment;
 
         return $this;
     }
+
+    public function mapForModel(PersonModel $personModel): void
+    {
+        $this->setFirstName($personModel->firstName);
+        $this->setLastName($personModel->lastName);
+        $this->setEmail($personModel->email);
+        $this->setPhone($personModel->phone);
+        $this->setApartment($personModel->apartment);
+    }
+
 }
