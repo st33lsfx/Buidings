@@ -16,7 +16,6 @@ class PersonFactory
         $newPerson->setLastName($personModel->lastName);
         $newPerson->setPhone($personModel->phone);
         $newPerson->setEmail($personModel->email);
-        $newPerson->setApartment($personModel->apartment);
 
         return $newPerson;
     }

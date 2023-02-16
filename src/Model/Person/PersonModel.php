@@ -18,7 +18,6 @@ class PersonModel
 
     public ?string $email = null;
 
-    public ?Apartment $apartment = null;
 
     public static function createFromEntity(Person $person): PersonModel
     {
@@ -29,7 +28,6 @@ class PersonModel
         $newPerson->lastName = $person->getLastName();
         $newPerson->phone = $person->getPhone();
         $newPerson->email = $person->getEmail();
-        $newPerson->apartment = $person->getApartment();
 
         return $newPerson;
     }

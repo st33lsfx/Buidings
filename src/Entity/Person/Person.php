@@ -5,6 +5,8 @@ namespace App\Entity\Person;
 use App\Entity\Apartments\Apartment;
 use App\Model\Person\PersonModel;
 use App\Repository\Person\PersonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use function Symfony\Component\Translation\t;
@@ -29,8 +31,13 @@ class Person
     #[ORM\Column]
     private int $phone;
 
-    #[ORM\OneToOne(mappedBy: 'person', cascade: ['persist', 'remove'])]
-    private ?Apartment $apartment = null;
+    #[ORM\OneToMany(mappedBy: 'person', targetEntity: Apartment::class)]
+    private Collection $apartment;
+
+    public function __construct()
+    {
+        $this->apartment = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -81,26 +88,23 @@ class Person
     {
         $this->lastName = $lastName;
     }
-    public function getApartment(): ?Apartment
+
+    /**
+     * @return Collection|null
+     */
+    public function getApartment(): Collection
     {
         return $this->apartment;
     }
 
-    public function setApartment(?Apartment $apartment): self
+    public function addApartment(Apartment $apartment): void
     {
-        // unset the owning side of the relation if necessary
-        if ($apartment === null && $this->apartment !== null) {
-            $this->apartment->setPerson(null);
-        }
+        $this->getApartment()->add($apartment);
+    }
 
-        // set the owning side of the relation if necessary
-        if ($apartment !== null && $apartment->getPerson() !== $this) {
-            $apartment->setPerson($this);
-        }
-
-        $this->apartment = $apartment;
-
-        return $this;
+    public function removeApartment(Apartment $apartment): void
+    {
+        $this->getApartment()->remove($apartment);
     }
 
     public function mapForModel(PersonModel $personModel): void
@@ -109,7 +113,6 @@ class Person
         $this->setLastName($personModel->lastName);
         $this->setEmail($personModel->email);
         $this->setPhone($personModel->phone);
-        $this->setApartment($personModel->apartment);
     }
 
 }

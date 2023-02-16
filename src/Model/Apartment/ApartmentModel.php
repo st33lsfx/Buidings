@@ -22,9 +22,9 @@ class ApartmentModel
 
     public ?float $squareStatus = null;
 
-    public building $building;
+    public Building $building;
 
-    public ?person $person = null;
+    public ?Person $person = null;
 
     public static function createFromEntity(Apartment $apartments): ApartmentModel
     {

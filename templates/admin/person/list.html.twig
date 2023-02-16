@@ -17,7 +17,6 @@
                             <th>Příjmení</th>
                             <th>Telefon</th>
                             <th>Email</th>
-                            <th>Apartmán</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -37,9 +36,6 @@
                                 </td>
                                 <td>
                                     {{ person.email }}
-                                </td>
-                                <td>
-                                    {{ person.apartment  }}
                                 </td>
                                 <td>
                                     <a href="{{ path('app_person_edit',{'id':person.id}) }}"

@@ -118,12 +118,12 @@ class Building
         return $this->apartment;
     }
 
-    public function addApartment(Apartment $apartment): self
+    public function addApartment(Apartment $apartment): void
     {
         $this->getApartments()->add($apartment);
     }
 
-    public function removeApartment(Apartment $apartment): self
+    public function removeApartment(Apartment $apartment): void
     {
         $this->getApartments()->remove($apartment);
     }

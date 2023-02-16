@@ -53,20 +53,6 @@ class PersonType extends AbstractType
                     'label' => 'Telefon'
                 ]
             )
-            ->add(
-                'apartment',
-                EntityType::class,
-                [
-                    'label' => 'Apartmán',
-                    'attr' => ['class' => 'form-control'],
-                    'class' => Apartment::class,
-                    'choice_label' => function ($apartment) {
-                        return $apartment->getTitle();
-                    },
-                    'choices' => $this->apartmentRepository->findAll(),
-                    'required' => false
-                ]
-            )
         ;
     }
 

@@ -38,7 +38,7 @@ class Apartment
     #[ORM\JoinColumn(name: 'building_id', referencedColumnName: 'id', nullable: false)]
     private Building $building;
 
-    #[ORM\OneToOne(inversedBy: 'apartment', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'apartment')]
     #[ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id', nullable: true)]
     private ?Person $person = null;
 
@@ -141,9 +141,6 @@ class Apartment
 
     public function setPerson(?Person $person): void
     {
-        if ($person) {
-            $person->setApartment($this);
-        }
         $this->person = $person;
     }
 
