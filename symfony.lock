@@ -47,6 +47,9 @@
             "config/packages/admin_lte.yaml"
         ]
     },
+    "knplabs/knp-menu-bundle": {
+        "version": "v3.2.0"
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
