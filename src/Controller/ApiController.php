@@ -60,7 +60,8 @@ class ApiController extends AbstractController
                 ],
                 'person' => [
                     'id' => $apartment->getPerson()->getId(),
-                    'first_name' => $apartment->getPerson()->getFirstName()
+                    'first_name' => $apartment->getPerson()->getFirstName(),
+                    'last_name' => $apartment->getPerson()->getLastName()
                 ],
                 'title' => $apartment->getTitle(),
                 'size' => $apartment->getSize(),
