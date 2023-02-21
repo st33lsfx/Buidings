@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import { Table} from "flowbite-react";
-import {useConfiguration} from "../configuration/useConfiguration";
 
 const BuildingsList = () => {
     const [buildings, setBuildings] = useState([]);
@@ -10,7 +9,6 @@ const BuildingsList = () => {
     useEffect(() => {
         async function getData() {
             try {
-                console.log(useConfiguration.urlApi )
                 const res = await axios.get( '/api/building/')
                 setBuildings( res.data );
                 console.log(res.data)

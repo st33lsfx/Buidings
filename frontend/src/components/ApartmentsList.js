@@ -2,7 +2,6 @@ import React, {useEffect, useState } from 'react';
 import axios from "axios";
 import {Table} from "flowbite-react";
 import {Link, useParams} from "react-router-dom";
-import {useConfiguration} from "../configuration/useConfiguration";
 
 function ApartmentsList() {
     const [apartments, setApartments] = useState([]);
@@ -65,13 +64,13 @@ function ApartmentsList() {
                                     {apartment.id}
                                 </Table.Cell>
                                 <Table.Cell>
-                                    {apartment.building_id}
+                                    {apartment.building['title']}
                                 </Table.Cell>
                                 <Table.Cell>
                                     {apartment.title}
                                 </Table.Cell>
                                 <Table.Cell>
-                                    {apartment.first_name} {apartment.last_name}
+                                    {apartment.person['first_name']}
                                 </Table.Cell>
                                 <Table.Cell>
                                     {apartment.size}
@@ -89,7 +88,7 @@ function ApartmentsList() {
                                     {apartment.square_status} m3
                                 </Table.Cell>
                                 <Table.Cell>
-                                   <Link to={`/person/${apartment.person_id}`}>Show person detail</Link>
+                                   <Link to={`/person/${apartment.person['id']}`}>Show person detail</Link>
                                 </Table.Cell>
                             </Table.Row>
                             ))}
