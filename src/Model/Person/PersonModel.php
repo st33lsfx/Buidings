@@ -16,7 +16,9 @@ class PersonModel
     public ?string $phone = null;
 
     #[Assert\NotBlank()]
-    #[Assert\Email()]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.'
+    )]
     public string $email;
 
 
