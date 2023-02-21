@@ -1,8 +1,14 @@
-# Getting Started with Create React App
+# Getting Started for Building react app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
+
+In the project directory install the necessary dependencies
+
+### `npm install`
+
+### Edit your .env to your localhost
 
 In the project directory, you can run:
 
