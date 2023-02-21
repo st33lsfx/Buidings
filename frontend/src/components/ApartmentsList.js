@@ -2,6 +2,7 @@ import React, {useEffect, useState } from 'react';
 import axios from "axios";
 import {Table} from "flowbite-react";
 import {Link, useParams} from "react-router-dom";
+import { AiFillHome } from "react-icons/ai";
 
 function ApartmentsList() {
     const [apartments, setApartments] = useState([]);
@@ -26,6 +27,9 @@ function ApartmentsList() {
                 <p className="text-3xl font-bold">List apartments</p>
             </div>
             <div className="m-24">
+                <div className="mb-16 mx-10">
+                    <Link to={`/`} className="flex flex-row items-center hover:text-gray-700"><AiFillHome className="mr-4"/>Back to building list</Link>
+                </div>
                 <Table>
                     <Table.Head className="text-center">
                         <Table.HeadCell>

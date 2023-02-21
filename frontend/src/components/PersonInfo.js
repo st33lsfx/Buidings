@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Table} from "flowbite-react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from "axios";
+import { BiArrowBack } from "react-icons/bi";
+import { AiFillHome } from "react-icons/ai";
 
 function PersonInfo(props) {
     const [person, setPerson] = useState([]);
@@ -25,6 +27,15 @@ function PersonInfo(props) {
                 <p className="text-3xl font-bold">Owner detail</p>
             </div>
             <div className="m-24">
+                <div className="flex flex-row ">
+                    <div className="mb-16 mx-10">
+                        <Link to={`/`} className="flex flex-row items-center hover:text-gray-700"><AiFillHome className="mr-4"/>Back to building list</Link>
+                    </div>
+                    /
+                    <div className="mb-16 mx-10">
+                        <Link to={`/apartment/${id}`} className="flex flex-row items-center hover:text-gray-700"><BiArrowBack className="mr-4"/>Back to apartment list</Link>
+                    </div>
+                </div>
                 <Table>
                     <Table.Head className="text-center">
                         <Table.HeadCell>

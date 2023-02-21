@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
-import { Table} from "flowbite-react";
+import { Table } from "flowbite-react";
 
 const BuildingsList = () => {
     const [buildings, setBuildings] = useState([]);
@@ -16,7 +16,7 @@ const BuildingsList = () => {
                 throw error;
             }
         }
-        getData().then(console.log).catch(console.error);
+        getData()
 
     }, []);
 
