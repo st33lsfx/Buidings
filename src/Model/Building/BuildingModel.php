@@ -3,13 +3,15 @@
 namespace App\Model\Building;
 
 use App\Entity\Building\Building;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class BuildingModel
 {
 
     public int $id;
 
-    public ?string $title = null;
+    #[Assert\NotBlank]
+    public string $title;
 
     public ?string $city = null;
 

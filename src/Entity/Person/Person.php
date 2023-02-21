@@ -14,22 +14,23 @@ use function Symfony\Component\Translation\t;
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
 class Person
 {
+    #[Groups('person')]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private int $id;
 
-    #[ORM\Column(length: 255,)]
+    #[ORM\Column(length: 255, nullable: false)]
     private string $firstName;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: false)]
     private string $lastName;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $email = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $email;
 
-    #[ORM\Column]
-    private string $phone;
+    #[ORM\Column(nullable: true)]
+    private ?string $phone = null;
 
     #[ORM\OneToMany(mappedBy: 'person', targetEntity: Apartment::class)]
     private Collection $apartment;
@@ -49,7 +50,7 @@ class Person
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -59,12 +60,12 @@ class Person
         $this->firstName = $firstName;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail(?string $email): void
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -74,12 +75,12 @@ class Person
         return $this->phone;
     }
 
-    public function setPhone(string $phone): void
+    public function setPhone(?string $phone): void
     {
         $this->phone = $phone;
     }
 
-    public function getLastName(): ?string
+    public function getLastName(): string
     {
         return $this->lastName;
     }

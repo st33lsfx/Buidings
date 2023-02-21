@@ -5,6 +5,7 @@ namespace App\Model\Apartment;
 use App\Entity\Apartments\Apartment;
 use App\Entity\Building\Building;
 use App\Entity\Person\Person;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ApartmentModel
 {
@@ -22,6 +23,7 @@ class ApartmentModel
 
     public ?float $squareStatus = null;
 
+    #[Assert\NotBlank]
     public Building $building;
 
     public ?Person $person = null;

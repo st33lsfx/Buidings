@@ -2,21 +2,24 @@
 
 namespace App\Model\Person;
 
-use App\Entity\Apartments\Apartment;
 use App\Entity\Person\Person;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class PersonModel
 {
-
     public int $id;
 
+    #[Assert\NotBlank()]
     public string $firstName;
 
+    #[Assert\NotBlank()]
     public string $lastName;
 
-    public string $phone;
+    public ?string $phone = null;
 
-    public ?string $email = null;
+    #[Assert\NotBlank()]
+    #[Assert\Email()]
+    public string $email;
 
 
     public static function createFromEntity(Person $person): PersonModel

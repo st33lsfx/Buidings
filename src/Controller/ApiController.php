@@ -61,6 +61,6 @@ class ApiController extends AbstractController
                 'square_meter' => $apartment->getSquareStatus()
             ];
         }
-        return $this->json($data);
+        return $this->json($data, Response::HTTP_OK, [], ['groups' => 'building','apartment']);
     }
 }

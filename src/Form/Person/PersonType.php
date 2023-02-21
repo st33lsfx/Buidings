@@ -43,14 +43,14 @@ class PersonType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Email',
-                    'required' => false
                 ]
             )
             ->add(
                 'phone',
                 TextType::class,
                 [
-                    'label' => 'Telefon'
+                    'label' => 'Telefon',
+                    'required' => false
                 ]
             )
         ;
