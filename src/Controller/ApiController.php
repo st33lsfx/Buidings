@@ -44,7 +44,7 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("api/apartment/{building_id}",name="api_list_apartment")
+     * @Route("api/apartment/{id}",name="api_list_apartment")
      */
     public function apiListApartment($id): Response
     {
