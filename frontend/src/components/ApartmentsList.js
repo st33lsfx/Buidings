@@ -74,7 +74,7 @@ function ApartmentsList() {
                                     {apartment.title}
                                 </Table.Cell>
                                 <Table.Cell>
-                                    {apartment.person['first_name']}
+                                    {apartment.person['first_name']} {apartment.person['last_name']}
                                 </Table.Cell>
                                 <Table.Cell>
                                     {apartment.size}
