@@ -29,11 +29,11 @@ function PersonInfo(props) {
             <div className="m-24">
                 <div className="flex flex-row ">
                     <div className="mb-16 mx-10">
-                        <Link to={`/`} className="flex flex-row items-center hover:text-gray-700"><AiFillHome className="mr-4"/>Back to building list</Link>
+                        <Link to={`/`} className="flex flex-row items-center hover:text-blue-700"><AiFillHome className="mr-4"/>Back to building list</Link>
                     </div>
                     /
                     <div className="mb-16 mx-10">
-                        <Link to={`/apartment/${id}`} className="flex flex-row items-center hover:text-gray-700"><BiArrowBack className="mr-4"/>Back to apartment list</Link>
+                        <Link to={`/apartment/${id}`} className="flex flex-row items-center hover:text-blue-700"><BiArrowBack className="mr-4"/>Back to apartment list</Link>
                     </div>
                 </div>
                 <Table>

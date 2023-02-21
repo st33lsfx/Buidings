@@ -28,7 +28,7 @@ function ApartmentsList() {
             </div>
             <div className="m-24">
                 <div className="mb-16 mx-10">
-                    <Link to={`/`} className="flex flex-row items-center hover:text-gray-700"><AiFillHome className="mr-4"/>Back to building list</Link>
+                    <Link to={`/`} className="flex flex-row items-center hover:text-blue-700"><AiFillHome className="mr-4"/>Back to building list</Link>
                 </div>
                 <Table>
                     <Table.Head className="text-center">
@@ -59,10 +59,12 @@ function ApartmentsList() {
                         <Table.HeadCell>
                             Square status
                         </Table.HeadCell>
+                        <Table.HeadCell>
+                            Person detail
+                        </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
                         { apartments.map(( apartment ) => (
-
                             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800 text-center" key={apartment.id}>
                                 <Table.Cell>
                                     {apartment.id}
@@ -74,7 +76,9 @@ function ApartmentsList() {
                                     {apartment.title}
                                 </Table.Cell>
                                 <Table.Cell>
-                                    {apartment.person['first_name']} {apartment.person['last_name']}
+                                    {
+                                        apartment.person !== null ? apartment.person.first_name : ''
+                                    }
                                 </Table.Cell>
                                 <Table.Cell>
                                     {apartment.size}
@@ -92,7 +96,7 @@ function ApartmentsList() {
                                     {apartment.square_status} m3
                                 </Table.Cell>
                                 <Table.Cell>
-                                   <Link to={`/person/${apartment.person['id']}`}>Show person detail</Link>
+                                   <Link to={`/person/${apartment.person['id']}`} className="hover:text-blue-700">Show person detail</Link>
                                 </Table.Cell>
                             </Table.Row>
                             ))}

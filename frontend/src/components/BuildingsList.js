@@ -69,7 +69,7 @@ const BuildingsList = () => {
                                     {building.postZip}
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <Link to={`/apartment/${building.id}`}>Show apartments</Link>
+                                    <Link to={`/apartment/${building.id}`} className="hover:text-blue-700">Show apartments</Link>
                                 </Table.Cell>
                             </Table.Row>
                         ))}

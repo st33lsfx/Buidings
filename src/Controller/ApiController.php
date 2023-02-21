@@ -44,24 +44,20 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("api/apartment/{id}",name="api_list_apartment")
+     * @Route("api/apartment/{building_id}",name="api_list_apartment")
      */
     public function apiListApartment($id): Response
     {
         $building = $this->buildingRepository->findOneBy(['id' => $id]);
         $data = [];
 
-        foreach ($building->getApartments() as $apartment){
-            $data[] = [
+
+        foreach ($building->getApartments() as $key => $apartment) {
+            $data[$key] = [
                 'id' => $apartment->getId(),
                 'building' => [
                     'id' => $apartment->getBuilding()->getId(),
                     'title' => $apartment->getBuilding()->getTitle()
-                ],
-                'person' => [
-                    'id' => $apartment->getPerson()->getId(),
-                    'first_name' => $apartment->getPerson()->getFirstName(),
-                    'last_name' => $apartment->getPerson()->getLastName()
                 ],
                 'title' => $apartment->getTitle(),
                 'size' => $apartment->getSize(),
@@ -70,9 +66,17 @@ class ApiController extends AbstractController
                 'gas_meter_status' => $apartment->getGasMeterStatus(),
                 'square_meter' => $apartment->getSquareStatus()
             ];
-    }
+            if ($apartment->getPerson()) {
+                $data[$key]['person'] = [
+                    'id' => $apartment->getPerson()->getId(),
+                    'first_name' => $apartment->getPerson()->getFirstName(),
+                    'last_name' => $apartment->getPerson()->getLastName()
+                ];
+            }
 
-        return $this->json($data, Response::HTTP_OK, [], ['groups' => 'building','apartment','person']);
+        }
+
+        return $this->json($data, Response::HTTP_OK, [], ['groups' => 'building', 'apartment', 'person']);
     }
 
     /**
@@ -83,13 +87,13 @@ class ApiController extends AbstractController
         $person = $this->personRepository->findOneBy(['id' => $id]);
         $data = [];
 
-            $data[] = [
-                'id' => $person->getId(),
-                'first_name' => $person->getFirstName(),
-                'last_name' => $person->getLastName(),
-                'email' => $person->getEmail(),
-                'phone' => $person->getPhone()
-            ];
+        $data[] = [
+            'id' => $person->getId(),
+            'first_name' => $person->getFirstName(),
+            'last_name' => $person->getLastName(),
+            'email' => $person->getEmail(),
+            'phone' => $person->getPhone()
+        ];
 
         return $this->json($data);
     }
