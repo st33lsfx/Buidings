@@ -46,7 +46,7 @@ class BuildingController extends AbstractController
             $building = $this->buildingFactory->createBuilding($newBuildingModel);
             $this->buildingRepository->save($building);
 
-            $this->addFlash('success', 'Budova byla úspěšně přidána');
+            $this->addFlash('success', $building->getTitle() .' byla úspěšně přidána');
             return $this->redirectToRoute('app_building_list', []);
         }
 
@@ -69,7 +69,7 @@ class BuildingController extends AbstractController
             $building->mapFromModel($editBuilding);
             $this->buildingRepository->save($building);
 
-            $this->addFlash('success', 'uspěšně upraveno');
+            $this->addFlash('success', $building->getTitle() . ' úspěšně upravena');
             return $this->redirectToRoute('app_building_list', []);
 
         }
@@ -84,7 +84,7 @@ class BuildingController extends AbstractController
     {
         $this->buildingRepository->remove($building);
 
-        $this->addFlash('success', 'Budova byla úspěšně smazána.');
+        $this->addFlash('success', $building->getTitle() . ' byla úspěšně smazána.');
 
         return $this->redirectToRoute('app_building_list');
     }

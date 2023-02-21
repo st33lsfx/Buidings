@@ -11,13 +11,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PersonType extends AbstractType
 {
-    private ApartmentRepository $apartmentRepository;
-
-    public function __construct(ApartmentRepository $apartmentRepository)
-    {
-        $this->apartmentRepository = $apartmentRepository;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

@@ -12,13 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiController extends AbstractController
 {
     private BuildingRepository $buildingRepository;
-    private ApartmentRepository $apartmentRepository;
     private PersonRepository $personRepository;
 
-    public function __construct(BuildingRepository $buildingRepository, ApartmentRepository $apartmentRepository, PersonRepository $personRepository)
+    public function __construct(BuildingRepository $buildingRepository, PersonRepository $personRepository)
     {
         $this->buildingRepository = $buildingRepository;
-        $this->apartmentRepository = $apartmentRepository;
         $this->personRepository = $personRepository;
     }
 
