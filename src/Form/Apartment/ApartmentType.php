@@ -95,7 +95,7 @@ class ApartmentType extends AbstractType
                     'attr' => ['class' => 'form-control'],
                     'class' => Person::class,
                     'choice_label' => function ($person) {
-                        return $person->getFirstName();
+                        return $person->getFirstName() . ' ' . $person->getLastName();
                     },
                     'choices' => $this->personRepository->findAll(),
                     'required' => false

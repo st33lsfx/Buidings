@@ -1,8 +1,8 @@
-import React, {useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Table} from "flowbite-react";
 import {Link, useParams} from "react-router-dom";
-import { AiFillHome } from "react-icons/ai";
+import {AiFillHome} from "react-icons/ai";
 
 function ApartmentsList() {
     const [apartments, setApartments] = useState([]);
@@ -28,7 +28,8 @@ function ApartmentsList() {
             </div>
             <div className="m-24">
                 <div className="mb-16 mx-10">
-                    <Link to={`/`} className="flex flex-row items-center hover:text-blue-700"><AiFillHome className="mr-4"/>Back to building list</Link>
+                    <Link to={`/`} className="flex flex-row items-center hover:text-blue-700"><AiFillHome
+                        className="mr-4"/>Back to building list</Link>
                 </div>
                 <Table>
                     <Table.Head className="text-center">
@@ -64,8 +65,9 @@ function ApartmentsList() {
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
-                        { apartments.map(( apartment ) => (
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800 text-center" key={apartment.id}>
+                        {apartments.map((apartment) => (
+                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800 text-center"
+                                       key={apartment.id}>
                                 <Table.Cell>
                                     {apartment.id}
                                 </Table.Cell>
@@ -75,11 +77,14 @@ function ApartmentsList() {
                                 <Table.Cell>
                                     {apartment.title}
                                 </Table.Cell>
-                                <Table.Cell>
-                                    {
-                                        apartment.person !== null ? apartment.person.first_name : ''
-                                    }
-                                </Table.Cell>
+                                {
+                                    apartment.person != null ?
+                                        <Table.Cell>
+                                            {apartment.person.first_name} {apartment.person.last_name}
+                                        </Table.Cell>
+                                        :
+                                        <Table.Cell> </Table.Cell>
+                                }
                                 <Table.Cell>
                                     {apartment.size}
                                 </Table.Cell>
@@ -95,11 +100,17 @@ function ApartmentsList() {
                                 <Table.Cell>
                                     {apartment.square_status} m3
                                 </Table.Cell>
-                                <Table.Cell>
-                                   <Link to={`/person/${apartment.person['id']}`} className="hover:text-blue-700">Show person detail</Link>
-                                </Table.Cell>
+                                {
+                                    apartment.person != null ?
+                                        <Table.Cell>
+                                            <Link to={`/person/${apartment.person.id}`} className="hover:text-blue-700">Show
+                                                person detail</Link>
+                                        </Table.Cell>
+                                        :
+                                        <Table.Cell> </Table.Cell>
+                                }
                             </Table.Row>
-                            ))}
+                        ))}
                     </Table.Body>
                 </Table>
             </div>
