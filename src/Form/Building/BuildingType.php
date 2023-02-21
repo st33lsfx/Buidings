@@ -25,29 +25,33 @@ class BuildingType extends AbstractType
                 'city',
                 TextType::class,
                 [
-                    'label' => 'Město'
+                    'label' => 'Město',
+                    'required' => false
                 ]
             )
             ->add(
                 'address',
                 TextType::class,
                 [
-                    'label' => 'Adresa'
+                    'label' => 'Adresa',
+                    'required' => false
                 ]
             )
             ->add(
                 'descriptionNumber',
                 NumberType::class,
                 [
-                    'label' => 'Číslo popisné'
+                    'label' => 'Číslo popisné',
+                    'required' => false
                 ]
             )
             ->add(
                 'postZip',
                 TextType::class,
-               [
-                   'label' => 'PSČ'
-               ]
+                [
+                    'label' => 'PSČ',
+                    'required' => false
+                ]
             );
     }
 

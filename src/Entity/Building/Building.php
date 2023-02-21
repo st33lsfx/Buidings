@@ -56,11 +56,9 @@ class Building
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
     public function getCity(): ?string
@@ -68,11 +66,9 @@ class Building
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity(?string $city): void
     {
         $this->city = $city;
-
-        return $this;
     }
 
     public function getAddress(): ?string
@@ -80,11 +76,9 @@ class Building
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): void
     {
         $this->address = $address;
-
-        return $this;
     }
 
     public function getDescriptionNumber(): ?int
@@ -92,11 +86,9 @@ class Building
         return $this->descriptionNumber;
     }
 
-    public function setDescriptionNumber(int $descriptionNumber): self
+    public function setDescriptionNumber(?int $descriptionNumber): void
     {
         $this->descriptionNumber = $descriptionNumber;
-
-        return $this;
     }
 
     public function getPostZip(): ?string
@@ -104,11 +96,9 @@ class Building
         return $this->postZip;
     }
 
-    public function setPostZip(string $postZip): self
+    public function setPostZip(?string $postZip): void
     {
         $this->postZip = $postZip;
-
-        return $this;
     }
 
     /**

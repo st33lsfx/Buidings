@@ -7,8 +7,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class PersonModel
 {
-    public int $id;
-
     #[Assert\NotBlank()]
     public string $firstName;
 
@@ -26,7 +24,6 @@ class PersonModel
     {
         $newPerson = new self();
 
-        $newPerson->id = $person->getId();
         $newPerson->firstName = $person->getFirstName();
         $newPerson->lastName = $person->getLastName();
         $newPerson->phone = $person->getPhone();

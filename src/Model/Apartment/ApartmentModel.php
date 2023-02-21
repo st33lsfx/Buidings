@@ -10,9 +10,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ApartmentModel
 {
 
-    public int $id;
-
-    public ?string $title = null;
+    #[Assert\NotBlank]
+    public string $title;
 
     public ?int $size = null;
 
@@ -32,7 +31,6 @@ class ApartmentModel
     {
         $newApartments = new self();
 
-        $newApartments->id = $apartments->getId();
         $newApartments->title = $apartments->getTitle();
         $newApartments->size = $apartments->getSize();
         $newApartments->coldWaterStatus = $apartments->getColdWaterStatus();

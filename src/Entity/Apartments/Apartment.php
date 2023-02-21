@@ -17,8 +17,8 @@ class Apartment
     #[ORM\Column]
     private int $id;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $title = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $title;
 
     #[ORM\Column(nullable: true)]
     private ?int $size = null;
@@ -53,7 +53,7 @@ class Apartment
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }

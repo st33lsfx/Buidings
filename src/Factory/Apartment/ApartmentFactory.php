@@ -3,7 +3,6 @@
 namespace App\Factory\Apartment;
 
 use App\Entity\Apartments\Apartment;
-use App\Entity\Building\Building;
 use App\Model\Apartment\ApartmentModel;
 
 class ApartmentFactory

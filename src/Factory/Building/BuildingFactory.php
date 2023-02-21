@@ -5,7 +5,6 @@ namespace App\Factory\Building;
 use App\Entity\Building\Building;
 use App\Model\Building\BuildingModel;
 
-
 final class BuildingFactory
 {
 

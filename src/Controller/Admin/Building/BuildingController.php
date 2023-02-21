@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin\Building;
 
-use App\Controller\BaseController;
 use App\Entity\Building\Building;
 use App\Factory\Building\BuildingFactory;
 use App\Form\Building\BuildingType;

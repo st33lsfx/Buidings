@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class BuildingModel
 {
 
-    public int $id;
-
     #[Assert\NotBlank]
     public string $title;
 
@@ -25,16 +23,10 @@ class BuildingModel
     {
         $build = new self();
 
-        $build->id = $building->getId();
-
         $build->title = $building->getTitle();
-
         $build->city = $building->getCity();
-
         $build->address = $building->getAddress();
-
         $build->descriptionNumber = $building->getDescriptionNumber();
-
         $build->postZip = $building->getPostZip();
 
         return $build;
